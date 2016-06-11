@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::{Handle, Result};
 use ::libc::c_void;
 use ::types::*;
@@ -18,11 +20,11 @@ pub struct GSPGPU_FramebufferInfo {
     pub framebuf_dispselect: u32,
     pub unk: u32,
 }
-impl ::core::clone::Clone for GSPGPU_FramebufferInfo {
+impl Clone for GSPGPU_FramebufferInfo {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for GSPGPU_FramebufferInfo {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for GSPGPU_FramebufferInfo {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 #[derive(Clone, Copy)]
@@ -43,11 +45,11 @@ pub struct GSPGPU_CaptureInfoEntry {
     pub format: u32,
     pub framebuf_widthbytesize: u32,
 }
-impl ::core::clone::Clone for GSPGPU_CaptureInfoEntry {
+impl Clone for GSPGPU_CaptureInfoEntry {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for GSPGPU_CaptureInfoEntry {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for GSPGPU_CaptureInfoEntry {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 #[repr(C)]
@@ -55,11 +57,11 @@ impl ::core::default::Default for GSPGPU_CaptureInfoEntry {
 pub struct GSPGPU_CaptureInfo {
     pub screencapture: [GSPGPU_CaptureInfoEntry; 2usize],
 }
-impl ::core::clone::Clone for GSPGPU_CaptureInfo {
+impl Clone for GSPGPU_CaptureInfo {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for GSPGPU_CaptureInfo {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for GSPGPU_CaptureInfo {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 #[repr(C)]

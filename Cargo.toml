@@ -5,7 +5,11 @@ description = "A safe wrapper around smealum's ctrulib."
 license = "https://en.wikipedia.org/wiki/Zlib_License"
 links = "ctru"
 name = "ctru-rs"
-version = "0.4.0"
+version = "0.5.0"
+
+[dependencies]
+ctr-std = { git = "https://github.com/FenrirWolf/ctr-std" }
+ctr-libc = { git = "https://github.com/FenrirWolf/ctr-libc" }
 
 [dependencies.ctru-sys]
 path = "ctru-sys"

@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::{Handle, Result};
 
 #[repr(C)]
@@ -6,11 +8,11 @@ pub struct httpcContext {
     pub servhandle: Handle,
     pub httphandle: u32,
 }
-impl ::core::clone::Clone for httpcContext {
+impl Clone for httpcContext {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for httpcContext {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for httpcContext {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 #[derive(Clone, Copy)]

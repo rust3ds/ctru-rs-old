@@ -1,11 +1,12 @@
 /*
+:q
  * C bindings generation: 
  * bindgen --sysroot=$DEVKITARM/arm-none-eabi -I$CTRULIB/include $CTRULIB/include/3ds.h
  */
 
-#![no_std]
-#![feature(question_mark)]
 #![allow(non_camel_case_types, non_snake_case, overflowing_literals)]
+
+extern crate libc;
 
 pub mod console;
 pub mod env;

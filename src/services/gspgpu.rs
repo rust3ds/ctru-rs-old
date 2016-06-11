@@ -1,6 +1,6 @@
-use libctru::services::gspgpu;
+use std::prelude::v1::*;
 
-use core::convert::From;
+use libctru::services::gspgpu;
 
 pub enum Event {
     Psc0,

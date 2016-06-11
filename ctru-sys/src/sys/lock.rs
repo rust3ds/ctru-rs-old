@@ -1,5 +1,7 @@
 //<sys/lock.h> from devkitArm, needed for synchronization.rs to compile
 
+use std::mem;
+
 pub type _LOCK_T = i32;
 #[repr(C)]
 #[derive(Copy)]
@@ -8,11 +10,11 @@ pub struct Struct___lock_t {
     pub thread_tag: u32,
     pub counter: u32,
 }
-impl ::core::clone::Clone for Struct___lock_t {
+impl Clone for Struct___lock_t {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct___lock_t {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct___lock_t {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type _LOCK_RECURSIVE_T = Struct___lock_t;
 extern "C" {

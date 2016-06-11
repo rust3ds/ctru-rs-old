@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::{Handle, Result};
 
 #[repr(C)]
@@ -9,12 +11,12 @@ pub struct AM_TitleEntry {
     pub unk: [u8; 6usize],
 }
 
-impl ::core::clone::Clone for AM_TitleEntry {
+impl Clone for AM_TitleEntry {
     fn clone(&self) -> Self { *self }
 }
 
-impl ::core::default::Default for AM_TitleEntry {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for AM_TitleEntry {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 extern "C" {

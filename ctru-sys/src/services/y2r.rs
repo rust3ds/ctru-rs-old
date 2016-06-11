@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::{Handle, Result};
 use ::libc::c_void;
 use ::types::*;
@@ -49,11 +51,11 @@ pub struct Y2RU_ColorCoefficients {
     pub g_offset: u16,
     pub b_offset: u16,
 }
-impl ::core::clone::Clone for Y2RU_ColorCoefficients {
+impl Clone for Y2RU_ColorCoefficients {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Y2RU_ColorCoefficients {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Y2RU_ColorCoefficients {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 #[derive(Clone, Copy)]
@@ -78,11 +80,11 @@ pub struct Y2RU_ConversionParams {
     pub unused: u8,
     pub alpha: u16,
 }
-impl ::core::clone::Clone for Y2RU_ConversionParams {
+impl Clone for Y2RU_ConversionParams {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Y2RU_ConversionParams {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Y2RU_ConversionParams {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 #[repr(C)]
@@ -105,11 +107,11 @@ pub struct Y2RU_DitheringWeightParams {
     pub w3_xEven_yOdd: u16,
     pub w3_xOdd_yOdd: u16,
 }
-impl ::core::clone::Clone for Y2RU_DitheringWeightParams {
+impl Clone for Y2RU_DitheringWeightParams {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Y2RU_DitheringWeightParams {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Y2RU_DitheringWeightParams {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 extern "C" {

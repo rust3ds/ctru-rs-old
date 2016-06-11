@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::Result;
 
 #[derive(Clone, Copy)]
@@ -41,11 +43,11 @@ pub struct MVDSTD_Config {
     pub physaddr_outdata1_colorconv: u32,
     pub unk_x6c: [u32; 44usize],
 }
-impl ::core::clone::Clone for MVDSTD_Config {
+impl Clone for MVDSTD_Config {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for MVDSTD_Config {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for MVDSTD_Config {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 extern "C" {

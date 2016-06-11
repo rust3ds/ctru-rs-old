@@ -1,4 +1,5 @@
 // TODO: Determine if anonymous enums are properly represented (they probably aren't)
+use std::mem;
 
 use ::{Handle, Result};
 use libc::c_void;
@@ -185,11 +186,11 @@ pub struct Struct_Unnamed14 {
     pub awbX0Right: u16,
     pub awbX0Left: u16,
 }
-impl ::core::clone::Clone for Struct_Unnamed14 {
+impl Clone for Struct_Unnamed14 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed14 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed14 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type CAMU_ImageQualityCalibrationData = Struct_Unnamed14;
 #[repr(C)]
@@ -211,11 +212,11 @@ pub struct Struct_Unnamed15 {
     pub imageHeight: s16,
     pub reserved: [u8; 16usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed15 {
+impl Clone for Struct_Unnamed15 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed15 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed15 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type CAMU_StereoCameraCalibrationData = Struct_Unnamed15;
 #[repr(C)]
@@ -242,11 +243,11 @@ pub struct Struct_Unnamed16 {
     pub autoWhiteBalanceWindowWidth: s16,
     pub autoWhiteBalanceWindowHeight: s16,
 }
-impl ::core::clone::Clone for Struct_Unnamed16 {
+impl Clone for Struct_Unnamed16 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed16 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed16 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type CAMU_PackageParameterCameraSelect = Struct_Unnamed16;
 #[repr(C)]
@@ -258,11 +259,11 @@ pub struct Struct_Unnamed17 {
     pub effect: u8,
     pub size: u8,
 }
-impl ::core::clone::Clone for Struct_Unnamed17 {
+impl Clone for Struct_Unnamed17 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed17 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed17 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type CAMU_PackageParameterContext = Struct_Unnamed17;
 #[repr(C)]
@@ -279,11 +280,11 @@ pub struct Struct_Unnamed18 {
     pub cropX1: s16,
     pub cropY1: s16,
 }
-impl ::core::clone::Clone for Struct_Unnamed18 {
+impl Clone for Struct_Unnamed18 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed18 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed18 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type CAMU_PackageParameterContextDetail = Struct_Unnamed18;
 

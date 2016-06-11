@@ -1,11 +1,11 @@
+use std::prelude::v1::*;
+use std::fmt::{self, Write};
+use std::ptr;
+
 use libctru::console::*;
-use libctru::libc;
+use libc;
 
 use gfx::Screen;
-
-use core::fmt::{self, Write};
-use core::default::Default;
-use core::ptr;
 
 pub struct Console {
     context: PrintConsole,
