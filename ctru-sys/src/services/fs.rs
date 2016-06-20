@@ -1,4 +1,5 @@
 // TODO: Determine if anonymous enums are properly represented (they probably aren't)
+use std::mem;
 
 use ::{Handle, Result};
 use ::libc::c_void;
@@ -157,11 +158,11 @@ pub struct Struct_Unnamed17 {
     pub attributes: u32,
     pub fileSize: u64,
 }
-impl ::core::clone::Clone for Struct_Unnamed17 {
+impl Clone for Struct_Unnamed17 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed17 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed17 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_DirectoryEntry = Struct_Unnamed17;
 
@@ -173,11 +174,11 @@ pub struct Struct_Unnamed18 {
     pub totalClusters: u32,
     pub freeClusters: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed18 {
+impl Clone for Struct_Unnamed18 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed18 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed18 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_ArchiveResource = Struct_Unnamed18;
 
@@ -188,11 +189,11 @@ pub struct Struct_Unnamed19 {
     pub _bindgen_bitfield_1_: FS_MediaType,
     pub padding: [u8; 7usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed19 {
+impl Clone for Struct_Unnamed19 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed19 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed19 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_ProgramInfo = Struct_Unnamed19;
 
@@ -203,11 +204,11 @@ pub struct Struct_Unnamed20 {
     pub companyCode: [u8; 2usize],
     pub remasterVersion: u16,
 }
-impl ::core::clone::Clone for Struct_Unnamed20 {
+impl Clone for Struct_Unnamed20 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed20 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed20 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_ProductInfo = Struct_Unnamed20;
 
@@ -217,11 +218,11 @@ pub struct Struct_Unnamed21 {
     pub aesCbcMac: [u8; 16usize],
     pub movableSed: [u8; 288usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed21 {
+impl Clone for Struct_Unnamed21 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed21 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed21 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_IntegrityVerificationSeed = Struct_Unnamed21;
 
@@ -234,11 +235,11 @@ pub struct Struct_Unnamed22 {
     pub saveId: u64,
     pub reserved2: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed22 {
+impl Clone for Struct_Unnamed22 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed22 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed22 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_ExtSaveDataInfo = Struct_Unnamed22;
 
@@ -250,11 +251,11 @@ pub struct Struct_Unnamed23 {
     pub reserved: u16,
     pub saveId: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed23 {
+impl Clone for Struct_Unnamed23 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed23 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed23 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_SystemSaveDataInfo = Struct_Unnamed23;
 
@@ -264,11 +265,11 @@ pub struct Struct_Unnamed24 {
     pub ivs: [u8; 16usize],
     pub encryptParameter: [u8; 16usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed24 {
+impl Clone for Struct_Unnamed24 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed24 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed24 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_DeviceMoveContext = Struct_Unnamed24;
 
@@ -279,11 +280,11 @@ pub struct Struct_Unnamed25 {
     pub size: u32,
     pub data: *const c_void,
 }
-impl ::core::clone::Clone for Struct_Unnamed25 {
+impl Clone for Struct_Unnamed25 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed25 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed25 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_Path = Struct_Unnamed25;
 
@@ -294,11 +295,11 @@ pub struct Struct_Unnamed26 {
     pub lowPath: FS_Path,
     pub handle: u64,
 }
-impl ::core::clone::Clone for Struct_Unnamed26 {
+impl Clone for Struct_Unnamed26 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed26 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed26 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type FS_Archive = Struct_Unnamed26;
 extern "C" {

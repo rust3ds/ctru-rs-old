@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::Result;
 
 #[repr(C)]
@@ -6,11 +8,11 @@ pub struct QTM_HeadTrackingInfoCoord {
     pub x: f32,
     pub y: f32,
 }
-impl ::core::clone::Clone for QTM_HeadTrackingInfoCoord {
+impl Clone for QTM_HeadTrackingInfoCoord {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for QTM_HeadTrackingInfoCoord {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for QTM_HeadTrackingInfoCoord {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 #[repr(C)]
@@ -22,11 +24,11 @@ pub struct QTM_HeadTrackingInfo {
     pub coords0: [QTM_HeadTrackingInfoCoord; 4usize],
     pub unk_x2c: [u32; 5usize],
 }
-impl ::core::clone::Clone for QTM_HeadTrackingInfo {
+impl Clone for QTM_HeadTrackingInfo {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for QTM_HeadTrackingInfo {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for QTM_HeadTrackingInfo {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 extern "C" {

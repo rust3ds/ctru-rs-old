@@ -1,5 +1,7 @@
 //TODO: Implement static functions
 
+use std::mem;
+
 use {Handle, Result};
 use libc::c_void;
 use ThreadFunc;
@@ -57,11 +59,11 @@ pub struct Struct_Unnamed4 {
     pub perm: u32,
     pub state: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed4 {
+impl Clone for Struct_Unnamed4 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed4 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed4 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type MemInfo = Struct_Unnamed4;
 #[repr(C)]
@@ -69,11 +71,11 @@ pub type MemInfo = Struct_Unnamed4;
 pub struct Struct_Unnamed5 {
     pub flags: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed5 {
+impl Clone for Struct_Unnamed5 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed5 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed5 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type PageInfo = Struct_Unnamed5;
 #[derive(Clone, Copy)]
@@ -102,11 +104,11 @@ pub struct Struct_Unnamed9 {
     pub process_id: u32,
     pub reason: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed9 {
+impl Clone for Struct_Unnamed9 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed9 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed9 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type ProcessEvent = Struct_Unnamed9;
 #[derive(Clone, Copy)]
@@ -122,11 +124,11 @@ pub type ExitProcessEventReason = Enum_Unnamed10;
 pub struct Struct_Unnamed11 {
     pub reason: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed11 {
+impl Clone for Struct_Unnamed11 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed11 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed11 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type ExitProcessEvent = Struct_Unnamed11;
 #[repr(C)]
@@ -136,11 +138,11 @@ pub struct Struct_Unnamed12 {
     pub base_addr: u32,
     pub entry_point: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed12 {
+impl Clone for Struct_Unnamed12 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed12 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed12 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type CreateThreadEvent = Struct_Unnamed12;
 #[derive(Clone, Copy)]
@@ -157,11 +159,11 @@ pub type ExitThreadEventReason = Enum_Unnamed13;
 pub struct Struct_Unnamed14 {
     pub reason: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed14 {
+impl Clone for Struct_Unnamed14 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed14 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed14 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type ExitThreadEvent = Struct_Unnamed14;
 #[derive(Clone, Copy)]
@@ -193,11 +195,11 @@ pub struct Struct_Unnamed17 {
     pub address: u32,
     pub argument: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed17 {
+impl Clone for Struct_Unnamed17 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed17 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed17 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type ExceptionEvent = Struct_Unnamed17;
 #[repr(C)]
@@ -205,11 +207,11 @@ pub type ExceptionEvent = Struct_Unnamed17;
 pub struct Struct_Unnamed18 {
     pub clock_tick: u64,
 }
-impl ::core::clone::Clone for Struct_Unnamed18 {
+impl Clone for Struct_Unnamed18 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed18 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed18 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type SchedulerInOutEvent = Struct_Unnamed18;
 #[repr(C)]
@@ -218,11 +220,11 @@ pub struct Struct_Unnamed19 {
     pub clock_tick: u64,
     pub syscall: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed19 {
+impl Clone for Struct_Unnamed19 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed19 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed19 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type SyscallInOutEvent = Struct_Unnamed19;
 #[repr(C)]
@@ -231,11 +233,11 @@ pub struct Struct_Unnamed20 {
     pub string_addr: u32,
     pub string_size: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed20 {
+impl Clone for Struct_Unnamed20 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed20 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed20 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type OutputStringEvent = Struct_Unnamed20;
 #[repr(C)]
@@ -246,11 +248,11 @@ pub struct Struct_Unnamed21 {
     pub memperm: u32,
     pub memstate: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed21 {
+impl Clone for Struct_Unnamed21 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed21 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed21 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type MapEvent = Struct_Unnamed21;
 #[derive(Clone, Copy)]
@@ -281,47 +283,47 @@ pub struct Struct_Unnamed23 {
 }
 impl Struct_Unnamed23 {
     pub unsafe fn process(&mut self) -> *mut ProcessEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn create_thread(&mut self) -> *mut CreateThreadEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn exit_thread(&mut self) -> *mut ExitThreadEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn exit_process(&mut self) -> *mut ExitProcessEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn exception(&mut self) -> *mut ExceptionEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn scheduler(&mut self) -> *mut SchedulerInOutEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn syscall(&mut self) -> *mut SyscallInOutEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn output_string(&mut self) -> *mut OutputStringEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
     pub unsafe fn map(&mut self) -> *mut MapEvent {
-        let raw: *mut u8 = ::core::mem::transmute(&self._bindgen_data_1_);
-        ::core::mem::transmute(raw.offset(0))
+        let raw: *mut u8 = mem::transmute(&self._bindgen_data_1_);
+        mem::transmute(raw.offset(0))
     }
 }
-impl ::core::clone::Clone for Struct_Unnamed23 {
+impl Clone for Struct_Unnamed23 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed23 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed23 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type DebugEventInfo = Struct_Unnamed23;
 extern "C" {
@@ -445,6 +447,6 @@ extern "C" {
      -> Result;
     pub fn svcContinueDebugEvent(debug: Handle, flags: u32) -> Result;
     pub fn svcBackdoor(callback:
-                           ::core::option::Option<extern "C" fn() -> s32>)
+                           Option<extern "C" fn() -> s32>)
      -> Result;
 }

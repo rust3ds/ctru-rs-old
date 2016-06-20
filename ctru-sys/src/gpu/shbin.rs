@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::types::*;
 
 #[derive(Clone, Copy)]
@@ -36,11 +38,11 @@ pub struct Struct_Unnamed4 {
     pub opdescSize: u32,
     pub opcdescData: *mut u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed4 {
+impl Clone for Struct_Unnamed4 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed4 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed4 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type DVLP_s = Struct_Unnamed4;
 #[repr(C)]
@@ -50,11 +52,11 @@ pub struct Struct_Unnamed5 {
     pub id: u16,
     pub data: [u32; 4usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed5 {
+impl Clone for Struct_Unnamed5 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed5 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed5 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type DVLE_constEntry_s = Struct_Unnamed5;
 #[repr(C)]
@@ -65,11 +67,11 @@ pub struct Struct_Unnamed6 {
     pub mask: u8,
     pub unk: [u8; 3usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed6 {
+impl Clone for Struct_Unnamed6 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed6 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed6 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type DVLE_outEntry_s = Struct_Unnamed6;
 #[repr(C)]
@@ -79,11 +81,11 @@ pub struct Struct_Unnamed7 {
     pub startReg: u16,
     pub endReg: u16,
 }
-impl ::core::clone::Clone for Struct_Unnamed7 {
+impl Clone for Struct_Unnamed7 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed7 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed7 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type DVLE_uniformEntry_s = Struct_Unnamed7;
 #[repr(C)]
@@ -105,11 +107,11 @@ pub struct Struct_Unnamed8 {
     pub outmapMode: u32,
     pub outmapClock: u32,
 }
-impl ::core::clone::Clone for Struct_Unnamed8 {
+impl Clone for Struct_Unnamed8 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed8 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed8 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type DVLE_s = Struct_Unnamed8;
 #[repr(C)]
@@ -119,11 +121,11 @@ pub struct Struct_Unnamed9 {
     pub DVLP: DVLP_s,
     pub DVLE: *mut DVLE_s,
 }
-impl ::core::clone::Clone for Struct_Unnamed9 {
+impl Clone for Struct_Unnamed9 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed9 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed9 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type DVLB_s = Struct_Unnamed9;
 extern "C" {

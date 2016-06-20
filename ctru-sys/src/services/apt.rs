@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::{Result, Handle};
 use ::libc::c_void;
 
@@ -74,11 +76,11 @@ pub struct aptHookCookie {
     pub callback: aptHookFn,
     pub param: *mut c_void,
 }
-impl ::core::clone::Clone for aptHookCookie {
+impl Clone for aptHookCookie {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for aptHookCookie {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for aptHookCookie {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 
 extern "C" {

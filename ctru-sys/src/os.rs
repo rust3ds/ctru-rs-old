@@ -1,4 +1,5 @@
 //TODO: Fix Bindgen's issues again. 
+use std::mem;
 
 use ::Result;
 use libc::c_void;
@@ -28,11 +29,11 @@ pub struct Struct_Unnamed2 {
     pub region: u8,
     pub reserved_x5: [u8; 3usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed2 {
+impl Clone for Struct_Unnamed2 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed2 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed2 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type OS_VersionBin = Struct_Unnamed2;
 extern "C" {

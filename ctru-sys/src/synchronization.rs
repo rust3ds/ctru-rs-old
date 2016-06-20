@@ -2,7 +2,7 @@
 
 use Handle;
 
-use super::lock::*;
+use sys::lock::*;
 
 pub type LightLock = _LOCK_T;
 pub type RecursiveLock = _LOCK_RECURSIVE_T;

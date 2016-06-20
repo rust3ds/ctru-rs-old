@@ -1,3 +1,5 @@
+use std::mem;
+
 use ::Result;
 use ::types::*;
 use gpu::shbin::*;
@@ -9,11 +11,11 @@ pub struct Struct_Unnamed1 {
     pub id: u32,
     pub data: [u32; 3usize],
 }
-impl ::core::clone::Clone for Struct_Unnamed1 {
+impl Clone for Struct_Unnamed1 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed1 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed1 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type float24Uniform_s = Struct_Unnamed1;
 #[repr(C)]
@@ -27,11 +29,11 @@ pub struct Struct_Unnamed2 {
     pub intUniformMask: u8,
     pub numFloat24Uniforms: u8,
 }
-impl ::core::clone::Clone for Struct_Unnamed2 {
+impl Clone for Struct_Unnamed2 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed2 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed2 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type shaderInstance_s = Struct_Unnamed2;
 #[repr(C)]
@@ -43,11 +45,11 @@ pub struct Struct_Unnamed3 {
     pub geoShaderInputStride: u8,
     pub geoShaderMode: u8,
 }
-impl ::core::clone::Clone for Struct_Unnamed3 {
+impl Clone for Struct_Unnamed3 {
     fn clone(&self) -> Self { *self }
 }
-impl ::core::default::Default for Struct_Unnamed3 {
-    fn default() -> Self { unsafe { ::core::mem::zeroed() } }
+impl Default for Struct_Unnamed3 {
+    fn default() -> Self { unsafe { mem::zeroed() } }
 }
 pub type shaderProgram_s = Struct_Unnamed3;
 #[derive(Clone, Copy)]
