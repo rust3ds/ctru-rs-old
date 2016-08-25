@@ -13,6 +13,9 @@ path = "ctru-sys"
 [dependencies.alloc_system3ds]
 git = "https://github.com/rust3ds/alloc_system3ds"
 
+[dependencies.rustc_builtins]
+git = "https://github.com/japaric/rustc-builtins.git"
+
 [lib]
 crate-type = ["rlib"]
 name = "ctru"

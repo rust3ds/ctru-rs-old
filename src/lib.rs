@@ -16,6 +16,7 @@ extern crate alloc;
 extern crate alloc_system;
 extern crate collections;
 extern crate rustc_unicode;
+extern crate rustc_builtins;
 
 extern crate ctru_sys as libctru;
 

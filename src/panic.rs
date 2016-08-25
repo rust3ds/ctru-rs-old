@@ -17,9 +17,15 @@ use core::any::Any;
 use collections::String;
 use collections::boxed::Box;
 
-///The compiler wants this to be here. Otherwise it won't be happy. And we like happy compilers.
+// The compiler wants this to be here. Otherwise it won't be happy. And we like happy compilers.
 #[lang = "eh_personality"]
 extern fn eh_personality() {}
+
+// It also wants these functions because we're not linking libgcc anymore
+#[no_mangle]
+pub extern "C" fn __aeabi_unwind_cpp_pr0() {}
+#[no_mangle]
+pub extern "C" fn __aeabi_unwind_cpp_pr1() {}
 
 /// Entry point of panic from the libcore crate.
 #[lang = "panic_fmt"]
