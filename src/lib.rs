@@ -1,6 +1,7 @@
 #![feature(alloc)]
 #![feature(collections)]
 #![feature(char_escape_debug)]
+#![feature(compiler_builtins_lib)]
 #![feature(lang_items)]
 #![feature(question_mark)]
 #![feature(slice_patterns)]
@@ -16,7 +17,7 @@ extern crate alloc;
 extern crate alloc_system;
 extern crate collections;
 extern crate rustc_unicode;
-extern crate rustc_builtins;
+extern crate compiler_builtins;
 
 extern crate ctru_sys as libctru;
 
