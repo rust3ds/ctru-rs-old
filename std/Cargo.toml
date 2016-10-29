@@ -8,6 +8,6 @@ license = "https://en.wikipedia.org/wiki/Zlib_License"
 crate-type = ["rlib"]
 
 [dependencies]
-alloc_system3ds = { git = "https://github.com/rust3ds/alloc_system3ds" }
+alloc_system3ds = { path = "../alloc_system" }
 ctru-sys = { path = "../ctru-sys" }
 spin = "0.4"

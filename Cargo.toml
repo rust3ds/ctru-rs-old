@@ -3,4 +3,5 @@ members = [
     "ctru-rs",
     "ctru-sys",
     "std",
+    "alloc_system",
 ]
