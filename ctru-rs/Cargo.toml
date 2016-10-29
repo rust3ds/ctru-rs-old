@@ -1,13 +1,17 @@
 [package]
-name = "std"
-version = "0.0.0"
 authors = ["Ronald Kinard <furyhunter600@gmail.com>"]
+build = "build.rs"
+description = "A safe wrapper around smealum's ctrulib."
 license = "https://en.wikipedia.org/wiki/Zlib_License"
+links = "ctru"
+name = "ctru-rs"
+version = "0.5.0"
 
 [lib]
 crate-type = ["rlib"]
+name = "ctru"
 
 [dependencies]
-alloc_system3ds = { git = "https://github.com/rust3ds/alloc_system3ds" }
 ctru-sys = { path = "../ctru-sys" }
-spin = "0.4"
+std = { path = "../std" }
+bitflags = "0.7.0"
