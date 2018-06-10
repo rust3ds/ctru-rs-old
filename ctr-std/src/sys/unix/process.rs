@@ -149,16 +149,3 @@ impl Process {
         match self.0 {}
     }
 }
-
-#[derive(PartialEq, Eq, Clone, Copy, Debug)]
-pub struct ExitCode(u8);
-
-impl ExitCode {
-    pub const SUCCESS: ExitCode = ExitCode(0 as _);
-    pub const FAILURE: ExitCode = ExitCode(-1 as _);
-
-    #[inline]
-    pub fn as_i32(&self) -> i32 {
-        self.0 as i32
-    }
-}
