@@ -77,10 +77,6 @@ impl AnonPipe {
 
     pub fn fd(&self) -> &FileDesc { &self.0 }
     pub fn into_fd(self) -> FileDesc { self.0 }
-    
-    pub fn diverge(&self) -> ! {
-        panic!()
-    }
 }
 
 pub fn read2(p1: AnonPipe,

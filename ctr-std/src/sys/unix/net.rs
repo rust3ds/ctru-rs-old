@@ -10,7 +10,7 @@
 
 use ffi::CStr;
 use io;
-use libc::{self, c_int, c_void, size_t, sockaddr, socklen_t, MSG_PEEK};
+use libc::{self, c_int, c_void, size_t, sockaddr, socklen_t, EAI_SYSTEM, MSG_PEEK};
 use mem;
 use net::{SocketAddr, Shutdown};
 use str;
@@ -43,8 +43,6 @@ use libc::SO_NOSIGPIPE;
 #[cfg(not(target_vendor = "apple"))]
 const SO_NOSIGPIPE: c_int = 0;
 
-const EAI_SYSTEM: c_int = 0;
-
 pub struct Socket(FileDesc);
 
 pub fn init() {}
@@ -62,7 +60,7 @@ pub fn cvt_gai(err: c_int) -> io::Result<()> {
     }
 
     let detail = unsafe {
-        str::from_utf8(CStr::from_ptr(libc::gai_strerror(err) as *const i8).to_bytes()).unwrap()
+        str::from_utf8(CStr::from_ptr(libc::gai_strerror(err)).to_bytes()).unwrap()
             .to_owned()
     };
     Err(io::Error::new(io::ErrorKind::Other,
@@ -342,7 +340,7 @@ impl Socket {
 
     pub fn set_nonblocking(&self, nonblocking: bool) -> io::Result<()> {
         let mut nonblocking = nonblocking as libc::c_int;
-        cvt(unsafe { libc::ioctl(*self.as_inner(), libc::FIONBIO as u32, &mut nonblocking) }).map(|_| ())
+        cvt(unsafe { libc::ioctl(*self.as_inner(), libc::FIONBIO, &mut nonblocking) }).map(|_| ())
     }
 
     pub fn take_error(&self) -> io::Result<Option<io::Error>> {

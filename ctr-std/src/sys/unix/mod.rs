@@ -13,7 +13,7 @@
 use io::{self, ErrorKind};
 use libc;
 
-#[cfg(any(dox, target_os = "linux", target_os = "horizon"))] pub use os::linux as platform;
+#[cfg(any(dox, target_os = "linux"))] pub use os::linux as platform;
 
 #[cfg(all(not(dox), target_os = "android"))]   pub use os::android as platform;
 #[cfg(all(not(dox), target_os = "bitrig"))]    pub use os::bitrig as platform;
@@ -82,7 +82,7 @@ pub fn init() {
 
     #[cfg(not(any(target_os = "emscripten", target_os = "fuchsia")))]
     unsafe fn reset_sigpipe() {
-        assert!(signal(0 as _, libc::SIG_IGN) != libc::SIG_ERR);
+        assert!(signal(libc::SIGPIPE, libc::SIG_IGN) != libc::SIG_ERR);
     }
     #[cfg(any(target_os = "emscripten", target_os = "fuchsia"))]
     unsafe fn reset_sigpipe() {}
@@ -92,18 +92,6 @@ pub fn init() {
 pub use sys::android::signal;
 #[cfg(not(target_os = "android"))]
 pub use libc::signal;
-
-pub fn unsupported<T>() -> io::Result<T> {
-    Err(unsupported_err())
-}
-
-pub fn unsupported_err() -> io::Error {
-    io::Error::new(io::ErrorKind::Other,
-                   "operation not supported on 3DS yet")
-}
-
-#[derive(Copy,Clone)]
-pub enum Void {}
 
 pub fn decode_error_kind(errno: i32) -> ErrorKind {
     match errno as libc::c_int {

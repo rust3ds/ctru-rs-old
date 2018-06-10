@@ -33,7 +33,10 @@
 #![allow(missing_debug_implementations)]
 
 cfg_if! {
-    if #[cfg(unix)] {
+    if #[cfg(target_os = "horizon")] {
+        mod horizon;
+        pub use self::horizon::*;
+    } else if #[cfg(unix)] {
         mod unix;
         pub use self::unix::*;
     } else if #[cfg(windows)] {

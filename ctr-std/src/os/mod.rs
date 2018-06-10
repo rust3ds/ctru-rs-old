@@ -47,6 +47,7 @@ cfg_if! {
         #[cfg(target_os = "solaris")]    pub mod solaris;
         #[cfg(target_os = "emscripten")] pub mod emscripten;
         #[cfg(target_os = "fuchsia")]    pub mod fuchsia;
+        #[cfg(target_os = "horizon")]    pub mod horizon;
 
         #[cfg(any(target_os = "redox", unix))]
         #[stable(feature = "rust1", since = "1.0.0")]
@@ -56,7 +57,7 @@ cfg_if! {
         #[stable(feature = "rust1", since = "1.0.0")]
         pub use sys::ext as windows;
 
-        #[cfg(any(target_os = "linux", target_os = "l4re", target_os = "horizon"))]
+        #[cfg(any(target_os = "linux", target_os = "l4re"))]
         pub mod linux;
 
     }

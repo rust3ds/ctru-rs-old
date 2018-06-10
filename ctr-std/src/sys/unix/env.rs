@@ -8,17 +8,6 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-#[cfg(target_os = "horizon")]
-pub mod os {
-    pub const FAMILY: &'static str = "nintendo";
-    pub const OS: &'static str = "horizon";
-    pub const DLL_PREFIX: &'static str = "";
-    pub const DLL_SUFFIX: &'static str = ".cro";
-    pub const DLL_EXTENSION: &'static str = ".cro";
-    pub const EXE_SUFFIX: &'static str = ".3dsx";
-    pub const EXE_EXTENSION: &'static str = "3dsx";
-}
-
 #[cfg(target_os = "linux")]
 pub mod os {
     pub const FAMILY: &'static str = "unix";
