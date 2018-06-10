@@ -73,7 +73,7 @@ impl Condvar {
         unsafe {
             let lock = self.lock.get();
 
-            if *lock != mutex::raw(mutex) {
+            if *lock != mutex::raw(mutex) as *mut i32 {
                 if *lock != ptr::null_mut() {
                     panic!("Condvar used with more than one Mutex");
                 }
@@ -102,7 +102,7 @@ impl Condvar {
         unsafe {
             let lock = self.lock.get();
 
-            if *lock != mutex::raw(mutex) {
+            if *lock != mutex::raw(mutex) as *mut i32 {
                 if *lock != ptr::null_mut() {
                     panic!("Condvar used with more than one Mutex");
                 }

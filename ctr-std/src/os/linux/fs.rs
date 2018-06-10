@@ -334,7 +334,7 @@ impl MetadataExt for Metadata {
     #[allow(deprecated)]
     fn as_raw_stat(&self) -> &raw::stat {
         unsafe {
-            &*(self.as_inner().as_inner() as *const libc::stat64
+            &*(self.as_inner().as_inner() as *const libc::stat
                                           as *const raw::stat)
         }
     }
@@ -366,19 +366,23 @@ impl MetadataExt for Metadata {
         self.as_inner().as_inner().st_atime as i64
     }
     fn st_atime_nsec(&self) -> i64 {
-        self.as_inner().as_inner().st_atime_nsec as i64
+        //self.as_inner().as_inner().st_atime_nsec as i64
+        0i64
     }
     fn st_mtime(&self) -> i64 {
         self.as_inner().as_inner().st_mtime as i64
     }
     fn st_mtime_nsec(&self) -> i64 {
-        self.as_inner().as_inner().st_mtime_nsec as i64
+        //self.as_inner().as_inner().st_mtime_nsec as i64
+        0i64
     }
     fn st_ctime(&self) -> i64 {
-        self.as_inner().as_inner().st_ctime as i64
+        //self.as_inner().as_inner().st_ctime as i64
+        0i64
     }
     fn st_ctime_nsec(&self) -> i64 {
-        self.as_inner().as_inner().st_ctime_nsec as i64
+        //self.as_inner().as_inner().st_ctime_nsec as i64
+        0i64
     }
     fn st_blksize(&self) -> u64 {
         self.as_inner().as_inner().st_blksize as u64

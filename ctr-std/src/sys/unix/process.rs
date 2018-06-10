@@ -16,11 +16,6 @@ use sys::pipe::AnonPipe;
 use sys::{unsupported, Void};
 use sys_common::process::{CommandEnv, DefaultEnvKey};
 
-use libc::c_int;
-
-const EXIT_SUCCESS: c_int = 0;
-const EXIT_FAILURE: c_int = 1;
-
 ////////////////////////////////////////////////////////////////////////////////
 // Command
 ////////////////////////////////////////////////////////////////////////////////
@@ -159,8 +154,8 @@ impl Process {
 pub struct ExitCode(u8);
 
 impl ExitCode {
-    pub const SUCCESS: ExitCode = ExitCode(EXIT_SUCCESS as _);
-    pub const FAILURE: ExitCode = ExitCode(EXIT_FAILURE as _);
+    pub const SUCCESS: ExitCode = ExitCode(0 as _);
+    pub const FAILURE: ExitCode = ExitCode(-1 as _);
 
     #[inline]
     pub fn as_i32(&self) -> i32 {

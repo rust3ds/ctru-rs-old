@@ -1,4 +1,4 @@
-// Copyright 2016 The Rust Project Developers. See the COPYRIGHT
+// Copyright 2014-2015 The Rust Project Developers. See the COPYRIGHT
 // file at the top-level directory of this distribution and at
 // http://rust-lang.org/COPYRIGHT.
 //
@@ -11,92 +11,56 @@
 #![cfg(target_thread_local)]
 #![unstable(feature = "thread_local_internals", issue = "0")]
 
-use cell::{Cell, UnsafeCell};
-use mem;
-use ptr;
-
-
-pub struct Key<T> {
-    inner: UnsafeCell<Option<T>>,
-
-    // Metadata to keep track of the state of the destructor. Remember that
-    // these variables are thread-local, not global.
-    dtor_registered: Cell<bool>,
-    dtor_running: Cell<bool>,
-}
-
-unsafe impl<T> ::marker::Sync for Key<T> { }
-
-impl<T> Key<T> {
-    pub const fn new() -> Key<T> {
-        Key {
-            inner: UnsafeCell::new(None),
-            dtor_registered: Cell::new(false),
-            dtor_running: Cell::new(false)
-        }
-    }
-
-    pub fn get(&'static self) -> Option<&'static UnsafeCell<Option<T>>> {
-        unsafe {
-            if mem::needs_drop::<T>() && self.dtor_running.get() {
-                return None
-            }
-            self.register_dtor();
-        }
-        Some(&self.inner)
-    }
-
-    unsafe fn register_dtor(&self) {
-        if !mem::needs_drop::<T>() || self.dtor_registered.get() {
-            return
-        }
-
-        register_dtor(self as *const _ as *mut u8,
-                      destroy_value::<T>);
-        self.dtor_registered.set(true);
-    }
-}
-
+// Since what appears to be glibc 2.18 this symbol has been shipped which
+// GCC and clang both use to invoke destructors in thread_local globals, so
+// let's do the same!
+//
+// Note, however, that we run on lots older linuxes, as well as cross
+// compiling from a newer linux to an older linux, so we also have a
+// fallback implementation to use as well.
+//
+// Due to rust-lang/rust#18804, make sure this is not generic!
+#[cfg(target_os = "linux")]
 pub unsafe fn register_dtor(t: *mut u8, dtor: unsafe extern fn(*mut u8)) {
-    // The fallback implementation uses a vanilla OS-based TLS key to track
-    // the list of destructors that need to be run for this thread. The key
-    // then has its own destructor which runs all the other destructors.
-    //
-    // The destructor for DTORS is a little special in that it has a `while`
-    // loop to continuously drain the list of registered destructors. It
-    // *should* be the case that this loop always terminates because we
-    // provide the guarantee that a TLS key cannot be set after it is
-    // flagged for destruction.
-    use sys_common::thread_local as os;
+    use libc;
+    use mem;
+    use sys_common::thread_local::register_dtor_fallback;
 
-    static DTORS: os::StaticKey = os::StaticKey::new(Some(run_dtors));
-    type List = Vec<(*mut u8, unsafe extern fn(*mut u8))>;
-    if DTORS.get().is_null() {
-        let v: Box<List> = box Vec::new();
-        DTORS.set(Box::into_raw(v) as *mut u8);
+    extern {
+        #[linkage = "extern_weak"]
+        static __dso_handle: *mut u8;
+        #[linkage = "extern_weak"]
+        static __cxa_thread_atexit_impl: *const libc::c_void;
     }
-    let list: &mut List = &mut *(DTORS.get() as *mut List);
-    list.push((t, dtor));
-
-    unsafe extern fn run_dtors(mut ptr: *mut u8) {
-        while !ptr.is_null() {
-            let list: Box<List> = Box::from_raw(ptr as *mut List);
-            for &(ptr, dtor) in list.iter() {
-                dtor(ptr);
-            }
-            ptr = DTORS.get();
-            DTORS.set(ptr::null_mut());
-        }
+    if !__cxa_thread_atexit_impl.is_null() {
+        type F = unsafe extern fn(dtor: unsafe extern fn(*mut u8),
+                                  arg: *mut u8,
+                                  dso_handle: *mut u8) -> libc::c_int;
+        mem::transmute::<*const libc::c_void, F>(__cxa_thread_atexit_impl)
+            (dtor, t, &__dso_handle as *const _ as *mut _);
+        return
     }
+    register_dtor_fallback(t, dtor);
 }
 
-pub unsafe extern fn destroy_value<T>(ptr: *mut u8) {
-    let ptr = ptr as *mut Key<T>;
-    // Right before we run the user destructor be sure to flag the
-    // destructor as running for this thread so calls to `get` will return
-    // `None`.
-    (*ptr).dtor_running.set(true);
+// macOS's analog of the above linux function is this _tlv_atexit function.
+// The disassembly of thread_local globals in C++ (at least produced by
+// clang) will have this show up in the output.
+#[cfg(target_os = "macos")]
+pub unsafe fn register_dtor(t: *mut u8, dtor: unsafe extern fn(*mut u8)) {
+    extern {
+        fn _tlv_atexit(dtor: unsafe extern fn(*mut u8),
+                       arg: *mut u8);
+    }
+    _tlv_atexit(dtor, t);
+}
 
+// Just use the thread_local fallback implementation, at least until there's
+// a more direct implementation.
+#[cfg(target_os = "fuchsia")]
+pub use sys_common::thread_local::register_dtor_fallback as register_dtor;
+
+pub fn requires_move_before_drop() -> bool {
     // The macOS implementation of TLS apparently had an odd aspect to it
     // where the pointer we have may be overwritten while this destructor
     // is running. Specifically if a TLS destructor re-accesses TLS it may
@@ -109,13 +73,5 @@ pub unsafe extern fn destroy_value<T>(ptr: *mut u8) {
     //
     // Hence, we use `ptr::read` on macOS (to move to a "safe" location)
     // instead of drop_in_place.
-    if cfg!(target_os = "macos") {
-        ptr::read((*ptr).inner.get());
-    } else {
-        ptr::drop_in_place((*ptr).inner.get());
-    }
-}
-
-pub fn requires_move_before_drop() -> bool {
-    false
+    cfg!(target_os = "macos")
 }

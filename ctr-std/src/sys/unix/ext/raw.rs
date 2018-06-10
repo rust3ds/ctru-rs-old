@@ -16,13 +16,18 @@
                               the standard library, the `libc` crate on \
                               crates.io should be used instead for the correct \
                               definitions")]
-#![allow(deprecated, warnings)]
+#![allow(deprecated)]
 
-#[allow(missing_docs)]
 #[stable(feature = "raw_ext", since = "1.1.0")] pub type uid_t = u32;
-
-#[allow(missing_docs)]
 #[stable(feature = "raw_ext", since = "1.1.0")] pub type gid_t = u32;
-
-#[allow(missing_docs)]
 #[stable(feature = "raw_ext", since = "1.1.0")] pub type pid_t = i32;
+
+#[doc(inline)]
+#[stable(feature = "pthread_t", since = "1.8.0")]
+pub use sys::platform::raw::pthread_t;
+#[doc(inline)]
+#[stable(feature = "raw_ext", since = "1.1.0")]
+pub use sys::platform::raw::{dev_t, ino_t, mode_t, nlink_t, off_t, blksize_t};
+#[doc(inline)]
+#[stable(feature = "raw_ext", since = "1.1.0")]
+pub use sys::platform::raw::{blkcnt_t, time_t};

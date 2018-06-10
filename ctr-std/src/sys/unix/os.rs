@@ -61,7 +61,7 @@ pub fn getcwd() -> io::Result<PathBuf> {
         unsafe {
             let ptr = buf.as_mut_ptr() as *mut libc::c_char;
             if !libc::getcwd(ptr, buf.capacity()).is_null() {
-                let len = CStr::from_ptr(buf.as_ptr() as *const _).to_bytes().len();
+                let len = CStr::from_ptr(buf.as_ptr() as *const i8).to_bytes().len();
                 buf.set_len(len);
                 buf.shrink_to_fit();
                 return Ok(PathBuf::from(OsString::from_vec(buf)));
@@ -85,7 +85,7 @@ pub fn chdir(p: &path::Path) -> io::Result<()> {
     let p: &OsStr = p.as_ref();
     let p = CString::new(p.as_bytes())?;
     unsafe {
-        match libc::chdir(p.as_ptr() as *const _) == (0 as c_int) {
+        match libc::chdir(p.as_ptr() as *const u8) == (0 as c_int) {
             true => Ok(()),
             false => Err(io::Error::last_os_error()),
         }
@@ -188,4 +188,4 @@ pub fn exit(code: i32) -> ! {
 
 pub fn getpid() -> u32 {
     panic!("no pids on 3DS")
-}
+}   

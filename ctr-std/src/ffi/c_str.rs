@@ -406,7 +406,7 @@ impl CString {
     /// ```
     #[stable(feature = "cstr_memory", since = "1.4.0")]
     pub unsafe fn from_raw(ptr: *mut c_char) -> CString {
-        let len = sys::strlen(ptr as *const _) + 1; // Including the NUL byte
+        let len = sys::strlen(ptr as *const u8) + 1; // Including the NUL byte
         let slice = slice::from_raw_parts_mut(ptr, len as usize);
         CString { inner: Box::from_raw(slice as *mut [c_char] as *mut [u8]) }
     }
@@ -682,6 +682,14 @@ impl Borrow<CStr> for CString {
     fn borrow(&self) -> &CStr { self }
 }
 
+#[stable(feature = "cstring_from_cow_cstr", since = "1.28.0")]
+impl<'a> From<Cow<'a, CStr>> for CString {
+    #[inline]
+    fn from(s: Cow<'a, CStr>) -> Self {
+        s.into_owned()
+    }
+}
+
 #[stable(feature = "box_from_c_str", since = "1.17.0")]
 impl<'a> From<&'a CStr> for Box<CStr> {
     fn from(s: &'a CStr) -> Box<CStr> {
@@ -703,6 +711,30 @@ impl From<CString> for Box<CStr> {
     #[inline]
     fn from(s: CString) -> Box<CStr> {
         s.into_boxed_c_str()
+    }
+}
+
+#[stable(feature = "cow_from_cstr", since = "1.28.0")]
+impl<'a> From<CString> for Cow<'a, CStr> {
+    #[inline]
+    fn from(s: CString) -> Cow<'a, CStr> {
+        Cow::Owned(s)
+    }
+}
+
+#[stable(feature = "cow_from_cstr", since = "1.28.0")]
+impl<'a> From<&'a CStr> for Cow<'a, CStr> {
+    #[inline]
+    fn from(s: &'a CStr) -> Cow<'a, CStr> {
+        Cow::Borrowed(s)
+    }
+}
+
+#[stable(feature = "cow_from_cstr", since = "1.28.0")]
+impl<'a> From<&'a CString> for Cow<'a, CStr> {
+    #[inline]
+    fn from(s: &'a CString) -> Cow<'a, CStr> {
+        Cow::Borrowed(s.as_c_str())
     }
 }
 
@@ -901,7 +933,7 @@ impl CStr {
     /// ```
     #[stable(feature = "rust1", since = "1.0.0")]
     pub unsafe fn from_ptr<'a>(ptr: *const c_char) -> &'a CStr {
-        let len = sys::strlen(ptr as *const _);
+        let len = sys::strlen(ptr as *const u8);
         let ptr = ptr as *const u8;
         CStr::from_bytes_with_nul_unchecked(slice::from_raw_parts(ptr, len as usize + 1))
     }
