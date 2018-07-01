@@ -12,8 +12,7 @@
 
 #![unstable(issue = "32838", feature = "allocator_api")]
 
-#[doc(inline)] #[allow(deprecated)] pub use alloc_crate::alloc::Heap;
-#[doc(inline)] pub use alloc_crate::alloc::{Global, Layout, oom};
+#[doc(inline)] pub use alloc_crate::alloc::{Global, Layout, handle_alloc_error};
 #[doc(inline)] pub use alloc_system::System;
 #[doc(inline)] pub use core::alloc::*;
 
@@ -23,36 +22,36 @@ use sys_common::util::dumb_print;
 
 static HOOK: AtomicPtr<()> = AtomicPtr::new(ptr::null_mut());
 
-/// Registers a custom OOM hook, replacing any that was previously registered.
+/// Registers a custom allocation error hook, replacing any that was previously registered.
 ///
-/// The OOM hook is invoked when an infallible memory allocation fails, before
+/// The allocation error hook is invoked when an infallible memory allocation fails, before
 /// the runtime aborts. The default hook prints a message to standard error,
-/// but this behavior can be customized with the [`set_oom_hook`] and
-/// [`take_oom_hook`] functions.
+/// but this behavior can be customized with the [`set_alloc_error_hook`] and
+/// [`take_alloc_error_hook`] functions.
 ///
 /// The hook is provided with a `Layout` struct which contains information
 /// about the allocation that failed.
 ///
-/// The OOM hook is a global resource.
-pub fn set_oom_hook(hook: fn(Layout)) {
+/// The allocation error hook is a global resource.
+pub fn set_alloc_error_hook(hook: fn(Layout)) {
     HOOK.store(hook as *mut (), Ordering::SeqCst);
 }
 
-/// Unregisters the current OOM hook, returning it.
+/// Unregisters the current allocation error hook, returning it.
 ///
-/// *See also the function [`set_oom_hook`].*
+/// *See also the function [`set_alloc_error_hook`].*
 ///
 /// If no custom hook is registered, the default hook will be returned.
-pub fn take_oom_hook() -> fn(Layout) {
+pub fn take_alloc_error_hook() -> fn(Layout) {
     let hook = HOOK.swap(ptr::null_mut(), Ordering::SeqCst);
     if hook.is_null() {
-        default_oom_hook
+        default_alloc_error_hook
     } else {
         unsafe { mem::transmute(hook) }
     }
 }
 
-fn default_oom_hook(layout: Layout) {
+fn default_alloc_error_hook(layout: Layout) {
     dumb_print(format_args!("memory allocation of {} bytes failed", layout.size()));
 }
 
@@ -62,7 +61,7 @@ fn default_oom_hook(layout: Layout) {
 pub extern fn rust_oom(layout: Layout) -> ! {
     let hook = HOOK.load(Ordering::SeqCst);
     let hook: fn(Layout) = if hook.is_null() {
-        default_oom_hook
+        default_alloc_error_hook
     } else {
         unsafe { mem::transmute(hook) }
     };
@@ -74,7 +73,7 @@ pub extern fn rust_oom(layout: Layout) -> ! {
 #[doc(hidden)]
 #[allow(unused_attributes)]
 pub mod __default_lib_allocator {
-    use super::{System, Layout, GlobalAlloc, Opaque};
+    use super::{System, Layout, GlobalAlloc};
     // for symbol names src/librustc/middle/allocator.rs
     // for signatures src/librustc_allocator/lib.rs
 
@@ -93,7 +92,7 @@ pub mod __default_lib_allocator {
     pub unsafe extern fn __rdl_dealloc(ptr: *mut u8,
                                        size: usize,
                                        align: usize) {
-        System.dealloc(ptr as *mut Opaque, Layout::from_size_align_unchecked(size, align))
+        System.dealloc(ptr as *mut u8, Layout::from_size_align_unchecked(size, align))
     }
 
     #[no_mangle]
@@ -103,7 +102,7 @@ pub mod __default_lib_allocator {
                                        align: usize,
                                        new_size: usize) -> *mut u8 {
         let old_layout = Layout::from_size_align_unchecked(old_size, align);
-        System.realloc(ptr as *mut Opaque, old_layout, new_size) as *mut u8
+        System.realloc(ptr as *mut u8, old_layout, new_size) as *mut u8
     }
 
     #[no_mangle]
