@@ -5,7 +5,7 @@ authors = ["Ronald Kinard <furyhunter600@gmail.com>"]
 license = "https://en.wikipedia.org/wiki/Zlib_License"
 
 [dependencies.libc]
-version = "0.2"
+version = "0.2.43"
 default-features = false
 optional = true
 
