@@ -11,6 +11,7 @@ optional = true
 
 [features]
 default = ["libc"]
+compiler_builtins = "0.1"
 
 # This is a dummy feature that only exists to work around a Xargo issue.
 # User code should not enable it.
