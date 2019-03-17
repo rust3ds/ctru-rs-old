@@ -11,7 +11,7 @@ fi
 
 set -euxo pipefail
 
-bindgen "$DEVKITPRO/libctru/include/citro2d.h" \
+bindgen "$DEVKITPRO/libctru/include/citro3d.h" \
     --rust-target nightly \
     --use-core \
     --distrust-clang-mangling \

@@ -1,5 +1,5 @@
 [package]
-name = "citro2d-sys"
+name = "citro3d-sys"
 version = "0.1.0"
 authors = ["Charlotte D. <darkkirb@gmail.com>"]
 
