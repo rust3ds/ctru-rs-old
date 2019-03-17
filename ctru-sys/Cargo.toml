@@ -5,7 +5,7 @@ authors = ["Ronald Kinard <furyhunter600@gmail.com>"]
 license = "https://en.wikipedia.org/wiki/Zlib_License"
 
 [dependencies]
-compiler_builtins = "0.1"
+compiler_builtins = { version = "0.1", optional = true }
 [dependencies.libc]
 version = "0.2.43"
 default-features = false
@@ -17,3 +17,4 @@ default = ["libc"]
 # This is a dummy feature that only exists to work around a Xargo issue.
 # User code should not enable it.
 stdbuild = []
+newnightly = ["compiler_builtins"]
