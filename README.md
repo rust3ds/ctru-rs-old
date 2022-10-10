@@ -1,3 +1,6 @@
+# Deprecated
+This repository has been deprecated in favour of the new `ctru-rs` version of the Rust3DS toolchain. For more information about the new tools and libraries, check [ctru-rs](https://github.com/rust3ds/ctru-rs).
+
 # ctru-rs
 
 A Rust wrapper library for smealum's [ctrulib](https://github.com/smealum/ctrulib).
